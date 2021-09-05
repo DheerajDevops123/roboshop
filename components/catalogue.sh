@@ -1,7 +1,7 @@
 source components/common.sh
 
 print "Installing the NodeJS"
-yum install nodejs make gcc-c++ -y
+yum install nodejs make gcc-c++ -y &>>$LOG
 STATUS $?
 
 print "Adding Roboshop User"
@@ -21,12 +21,13 @@ STATUS $?
 cd /home/roboshop/catalogue
 
 print "Installing npm"
-npm install 
+npm install &>>$LOG
 STATUS $?
 
 # NOTE: We need to update the IP address of MONGODB Server in systemd.service file
 # Now, lets set up the service with systemctl.
 
+print "Starting Catalogue"
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
 systemctl daemon-reload
 systemctl start catalogue
