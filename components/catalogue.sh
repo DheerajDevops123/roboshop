@@ -20,7 +20,7 @@ STATUS $?
 
 cd /home/roboshop/catalogue
 
-print "Installing npm"
+print "Installing npm\t"
 npm install &>>$LOG
 STATUS $?
 
