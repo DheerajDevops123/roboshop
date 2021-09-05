@@ -32,33 +32,33 @@ echo "Starting MongoDB"
 systemctl enable mongod
 systemctl restart mongod
 if [ $? -eq 0];then
-    echo "\e[32mSUCCESS\e[0m"
+    echo -e "\e[32mSUCCESS\e[0m"
 else
-echo "\e[31mFAILURE\e[0m"
+echo -e "\e[31mFAILURE\e[0m"
 fi
 
 echo "Downloading MongoDB Schema"
 curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
 if [ $? -eq 0];then
-    echo "\e[32mSUCCESS\e[0m"
+    echo -e "\e[32mSUCCESS\e[0m"
 else
-echo "\e[31mFAILURE\e[0m"
+echo -e "\e[31mFAILURE\e[0m"
 fi
 
 cd /tmp
 echo "Extracting Schema"
 unzip -o mongodb.zip &>>/tmp/log
 if [ $? -eq 0];then
-    echo "\e[32mSUCCESS\e[0m"
+    echo -e "\e[32mSUCCESS\e[0m"
 else
-echo "\e[31mFAILURE\e[0m"
+echo-e "\e[31mFAILURE\e[0m"
 fi
 cd mongodb-main
 echo "Loading Schema"
 mongo < catalogue.js &>>/tmp/log
 mongo < users.js &>>/tmp/log
 if [ $? -eq 0];then
-    echo "\e[32mSUCCESS\e[0m"
+    echo -e "\e[32mSUCCESS\e[0m"
 else
-echo "\e[31mFAILURE\e[0m"
+echo -e "\e[31mFAILURE\e[0m"
 fi
