@@ -19,9 +19,7 @@ STATUS $?
 
 print "Extracting Catalogue"
 cd /home/roboshop
-rm -rf catalogue
-unzip -o /tmp/catalogue.zip &>>$LOG
-mv catalogue-main catalogue
+rm -rf catalogue && unzip -o /tmp/catalogue.zip &>>$LOG && mv catalogue-main catalogue
 STATUS $?
 
 cd /home/roboshop/catalogue
