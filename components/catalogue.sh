@@ -5,6 +5,7 @@ yum install nodejs make gcc-c++ -y &>>$LOG
 STATUS $?
 
 print "Adding Roboshop User"
+if []
 useradd roboshop &>>$LOG
 STATUS $?
 
