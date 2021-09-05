@@ -10,7 +10,7 @@ fi
 }
 
 print() {
-    echo -n -e "$1 - "
+    echo -n -e "$1 \t- "
 }
 
 print "Setting up MongoDB Repository"
@@ -22,15 +22,15 @@ enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc' >/etc/yum.repos.d/mongodb.repo
 STATUS $?
 
-print "Installing MongoDB"
+print "\tInstalling MongoDB"
 yum install -y mongodb-org &>>/tmp/log
 STATUS $?
 
-print "Configuring MongoDB"
+print "\tConfiguring MongoDB"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 STATUS $?
 
-print "Starting MongoDB"
+print "\tStarting MongoDB"
 systemctl enable mongod
 systemctl restart mongod
 STATUS $?
@@ -40,12 +40,12 @@ curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongo
 STATUS $?
 
 cd /tmp
-print "Extracting Schema"
+print "\tExtracting Schema"
 unzip -o mongodb.zip &>>/tmp/log
 STATUS $?
 
 cd mongodb-main
-print "Loading Schema"
+print "\t\tLoading Schema"
 mongo < catalogue.js &>>/tmp/log
 mongo < users.js &>>/tmp/log
 STATUS $?
