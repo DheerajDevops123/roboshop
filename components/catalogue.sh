@@ -28,12 +28,8 @@ print "Installing npm\t"
 npm install --unsafe-perm &>>$LOG
 STATUS $?
 
+chown roboshop:roboshop -R /home/roboshop
 
-# NOTE: We need to update the IP address of MONGODB Server in systemd.service file
-# Now, lets set up the service with systemctl.
-
-# print "Starting Catalogue"
-# mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
-# systemctl daemon-reload
-# systemctl start catalogue
-# systemctl enable catalogue
+print "Set up Systemd service Catalogue"
+mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service && systemctl daemon-reload && systemctl start catalogue &>>$LOG && systemctl enable catalogue &>>$LOG
+STATUS $?
