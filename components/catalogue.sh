@@ -5,7 +5,6 @@ yum install nodejs make gcc-c++ -y &>>$LOG
 STATUS $?
 
 print "Adding Roboshop User"
-if []
 useradd roboshop &>>$LOG
 STATUS $?
 
@@ -28,8 +27,8 @@ STATUS $?
 # NOTE: We need to update the IP address of MONGODB Server in systemd.service file
 # Now, lets set up the service with systemctl.
 
-print "Starting Catalogue"
-mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
-systemctl daemon-reload
-systemctl start catalogue
-systemctl enable catalogue
+# print "Starting Catalogue"
+# mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
+# systemctl daemon-reload
+# systemctl start catalogue
+# systemctl enable catalogue
