@@ -30,6 +30,6 @@ STATUS $?
 
 chown roboshop:roboshop -R /home/roboshop
 
-print "Set up Systemd service Catalogue"
+print "SystemD Service"
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service && systemctl daemon-reload && systemctl start catalogue &>>$LOG && systemctl enable catalogue &>>$LOG
 STATUS $?
