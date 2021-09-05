@@ -26,7 +26,7 @@ STATUS $?
 
 cd /home/roboshop/catalogue
 
-print "Downloading Node JS Dependencies\t"
+print "Installing npm\t"
 npm install --unsafe-perm &>>$LOG
 STATUS $?
 
