@@ -6,10 +6,10 @@ STATUS $?
 
 print "Adding Roboshop User"
 id roboshop &>>$LOG
-if [$? -eq 0]; then
-echo "User already Exist" &>>$LOG
+if [ $? -eq 0 ]; then
+    echo "User already Exist" &>>$LOG
 else
-useradd roboshop &>>$LOG
+    useradd roboshop &>>$LOG
 fi
 STATUS $?
 
