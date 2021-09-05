@@ -21,7 +21,7 @@ STATUS $?
 cd /home/roboshop/catalogue
 
 print "Installing npm\t"
-npm install &>>$LOG
+npm install --unsafe-perm &>>$LOG
 STATUS $?
 
 # NOTE: We need to update the IP address of MONGODB Server in systemd.service file
