@@ -17,6 +17,6 @@ print "Configuring Redis\t\t\t"
 sed -i -e "s/127.0.0.1/0.0.0.0/" /etc/redis.conf
 STATUS $?
 
-print "Start Redis Database\t\t"
+print "Start Redis Database\t\t\t"
 systemctl enable redis && systemctl restart redis &>>$LOG
 STATUS $?
