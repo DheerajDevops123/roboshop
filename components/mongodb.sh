@@ -21,7 +21,7 @@ STATUS $?
 
 echo "Installing MongoDB"
 yum install -y mongodb-org &>>/tmp/log
-STATUS
+STATUS $?
 
 echo "Configuring MongoDB"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
