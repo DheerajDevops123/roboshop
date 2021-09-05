@@ -1,17 +1,5 @@
 #!/bin/bash
-
-STATUS() {
-if [ $1 -eq 0 ]; then
-    echo -e "\e[32mSUCCESS\e[0m"
-else
-    echo -e "\e[31mFAILURE\e[0m"
-    exit 2
-fi
-}
-
-print() {
-    echo -n -e "$1 \t- "
-}
+source components/common.sh
 
 print "Setting up MongoDB Repository"
 echo '[mongodb-org-4.2]
@@ -45,7 +33,7 @@ unzip -o mongodb.zip &>>/tmp/log
 STATUS $?
 
 cd mongodb-main
-print "Loading Schema\t"
+print "Loading Schema\t\t"
 mongo < catalogue.js &>>/tmp/log
 mongo < users.js &>>/tmp/log
 STATUS $?
