@@ -22,15 +22,15 @@ enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc' >/etc/yum.repos.d/mongodb.repo
 STATUS $?
 
-print "\tInstalling MongoDB"
+print "Installing MongoDB\t"
 yum install -y mongodb-org &>>/tmp/log
 STATUS $?
 
-print "\tConfiguring MongoDB"
+print "\tConfiguring MongoDB\t"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 STATUS $?
 
-print "\tStarting MongoDB"
+print "Starting MongoDB\t"
 systemctl enable mongod
 systemctl restart mongod
 STATUS $?
@@ -40,12 +40,12 @@ curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongo
 STATUS $?
 
 cd /tmp
-print "\tExtracting Schema"
+print "Extracting Schema\t"
 unzip -o mongodb.zip &>>/tmp/log
 STATUS $?
 
 cd mongodb-main
-print "\t\tLoading Schema"
+print "Loading Schema\t"
 mongo < catalogue.js &>>/tmp/log
 mongo < users.js &>>/tmp/log
 STATUS $?
