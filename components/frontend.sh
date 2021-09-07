@@ -6,12 +6,12 @@ yum install nginx -y &>>$LOG
 STATUS $?
 
 print "Download frontend HTML Doc"
-curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>>$LOG
+curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
 STATUS $?
 
 
 print "Extracting FrontEnd"
-rm -rf usr/share/nginx/* && cd /usr/share/nginx/html && unzip -o /tmp/frontend.zip &>>$LOG && mv frontend-main/* . &>>$LOG && mv static/* . &>>$LOG
+rm -rf usr/share/nginx/* && cd /usr/share/nginx/html && unzip -o /tmp/frontend.zip &>>$LOG && mv frontend-main/* . &>>$LOG && mv static . &>>$LOG
 STATUS $?
 
 print "Update Roboshop Config"
