@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source components/common.sh
 
 print "Installing the NodeJS"
