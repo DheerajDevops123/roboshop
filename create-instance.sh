@@ -13,7 +13,19 @@ aws ec2 describe-instances --filters "Name=tag:Name,Values=$INSTANCE_NAME" | jq 
 if [ $? -eq 0 ]; then
 echo "Instance $INSTANCE_NAME is already running"
 exit 0
-else
-IP=$(aws ec2 run-instances --launch-template LaunchTemplateId=$LID,Version=$LVER --tag-specifications "ResourceType=spot-instances-request,Tags=[{Key=Name,Value=$INSTANCE_NAME}]" "ResourceType=instance,Tags=[{Key=Name,Value=$INSTANCE_NAME}]" | jq .Instances[].PrivateIpAddress | sed -e 's/"//g')
 fi
+
+aws ec2 describe-instances --filters "Name=tag:Name,Values=$INSTANCE_NAME" | jq .Reservations[].Instances[].State.Name | grep stopped  &>/dev/null
+if [ $? -eq 0 ]; then
+echo "Instance $INSTANCE_NAME is already Started & Terminated"
+exit 0
+fi
+
+
+
+
+IP=$(aws ec2 run-instances --launch-template LaunchTemplateId=$LID,Version=$LVER --tag-specifications "ResourceType=spot-instances-request,Tags=[{Key=Name,Value=$INSTANCE_NAME}]" "ResourceType=instance,Tags=[{Key=Name,Value=$INSTANCE_NAME}]" | jq .Instances[].PrivateIpAddress | sed -e 's/"//g')
+
+
+
 
