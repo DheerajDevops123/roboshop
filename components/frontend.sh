@@ -11,7 +11,7 @@ STATUS $?
 
 
 print "Extracting FrontEnd"
-rm -rf usr/share/nginx/* && cd /usr/share/nginx/html && unzip -o /tmp/frontend.zip  &>>$LOG  &&  mv frontend-main/* .  &>>$LOG  &&  mv static html &>>$LOG
+rm -rf /usr/share/nginx/* && cd /usr/share/nginx/html && unzip -o /tmp/frontend.zip  &>>$LOG  &&  mv frontend-main/* .  &>>$LOG  &&  mv static html &>>$LOG
 STATUS $?
 
 print "Update Roboshop Config"
