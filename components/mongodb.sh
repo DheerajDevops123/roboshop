@@ -15,10 +15,10 @@ yum install -y mongodb-org &>>$LOG
 STATUS $?
 
 print "Configuring MongoDB\t"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+sed -i -e "s/127.0.0.1/0.0.0.0/" /etc/mongod.conf
 STATUS $?
 
-print "Starting MongoDB\t"
+Print "Starting MongoDB\t"
 systemctl enable mongod
 systemctl restart mongod
 STATUS $?
@@ -37,3 +37,5 @@ print "Loading Schema\t\t"
 mongo < catalogue.js &>>$LOG
 mongo < users.js &>>$LOG
 STATUS $?
+
+exit 0
