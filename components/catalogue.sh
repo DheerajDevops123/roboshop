@@ -30,8 +30,6 @@ print "Installing npm\t"
 npm install --unsafe-perm &>>$LOG
 STATUS $?
 
-chown roboshop:roboshop -R /home/roboshop
-
 print "Update SystemD Service"
 sed -i -e "s/MONGO_DNSNAME/mongodb.roboshop.internal/" /home/roboshop/catalogue/systemd.service &>>$LOG
 STATUS $?
