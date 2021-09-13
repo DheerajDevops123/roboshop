@@ -31,7 +31,7 @@ npm install --unsafe-perm &>>$LOG
 STATUS $?
 
 print "Update SystemD Service"
-sed -i -e "s/MONGO_DNSNAME/mongodb.roboshop.internal/" /home/roboshop/catalogue/systemd.service &>>$LOG
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service &>>$LOG
 STATUS $?
 
 print "Setup SystemD Service"
