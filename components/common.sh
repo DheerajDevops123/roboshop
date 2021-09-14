@@ -21,3 +21,49 @@ fi
 
 LOG=/tmp/roboshop.log
 rm -f $LOG
+
+ADD_APP_USER() {
+    print "Adding Roboshop User"
+    id roboshop &>>$LOG
+    if [ $? -eq 0 ]; then
+        echo "User already Exist" &>>$LOG
+    else
+        useradd roboshop &>>$LOG
+    fi
+    STATUS $?
+}
+
+DOWNLOAD() {
+    print "Downloading $COMPONENT content"
+    curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/roboshop-devops-project/$COMPONENT/archive/main.zip"
+    STATUS $?
+    
+    print "Extracting $COMPONENT content"
+    cd /home/roboshop
+    rm -rf $COMPONENT && unzip -o /tmp/$COMPONENT.zip &>>$LOG && mv $COMPONENT-main $COMPONENT
+    STATUS $?
+}
+
+
+SystemD_Setup() {
+    print "Update SystemD Service"
+    sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/$COMPONENT/systemd.service &>>$LOG
+    STATUS $?
+    
+    print "Setup SystemD Service"
+    mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service && systemctl daemon-reload && systemctl restart $COMPONENT &>>$LOG && systemctl enable $COMPONENT &>>$LOG
+    STATUS $?
+}
+
+NODEJS() {
+    print "Installing the NodeJS"
+    yum install nodejs make gcc-c++ -y &>>$LOG
+    STATUS $?
+    ADD_APP_USER
+    DOWNLOAD
+    print "Installing npm\t"
+     cd /home/roboshop/$COMPONENT
+    npm install --unsafe-perm &>>$LOG
+    STATUS $?
+    SystemD_Setup
+}
