@@ -32,7 +32,7 @@ STATUS $?
 
 print "Uninstall Password validate plugin"
 echo "uninstall plugin validate_password;" >/tmp/pass.sql
-mysql -u root -p"RoboShop@1" </tmp/pass.sql
+mysql -u root -p"RoboShop@1" </tmp/pass.sql &>>$LOG
 STATUS $?
 
 
@@ -42,6 +42,7 @@ STATUS $?
 
 print "Extract Schema"
 cd /tmp && unzip -o mysql.zip &>>$LOG
+STATUS $?
 
 print "Loading Schema"
 cd mysql-main
