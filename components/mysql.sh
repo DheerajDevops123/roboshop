@@ -2,7 +2,7 @@
 
 source components/common.sh
 
-print "Setup MySQL Repo"
+print "Setup MySQL Repo\t\t"
 echo '[mysql57-community]
 name=MySQL 5.7 Community Server
 baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/7/$basearch/
@@ -10,17 +10,17 @@ enabled=1
 gpgcheck=0' > /etc/yum.repos.d/mysql.repo
 STATUS $?
 
-print "Install MySQL\t"
+print "Install MySQL\t\t"
 yum remove mariadb-libs -y &>>$LOG && yum install mysql-community-server -y &>>$LOG
 STATUS $?
 
-print "Start MySQL\t"
+print "Start MySQL\t\t"
 systemctl enable mysqld &>>$LOG && systemctl start mysqld &>>$LOG
 STATUS $?
 
 PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
 
-print "Reset Default Password"
+print "Reset Default Password\t"
 echo 'show databases' | mysql -uroot -pRoboShop@1 &>>$LOG
 if [ $? -eq 0 ]; then
     echo "Root Password is already set" &>>$LOG
@@ -31,20 +31,25 @@ fi
 STATUS $?
 
 print "Uninstall Password validate plugin"
-echo "uninstall plugin validate_password;" >/tmp/pass.sql
-mysql -u root -p"RoboShop@1" </tmp/pass.sql &>>$LOG
+echo 'show plugins;' | mysql -u root -p"RoboShop@1" | grep -i validate_password &>>$LOG
+if [ $? eq 0 ]; then
+    echo "uninstall plugin validate_password;" >/tmp/pass.sql
+    mysql -u root -p"RoboShop@1" </tmp/pass.sql &>>$LOG
+else
+    echo "Validate Password Plugin is already uninstalled"
+fi
 STATUS $?
 
 
-print "Downloading Schema"
+print "Downloading Schema\t\t"
 curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>$LOG
 STATUS $?
 
-print "Extract Schema"
+print "Extract Schema\t\t"
 cd /tmp && unzip -o mysql.zip &>>$LOG
 STATUS $?
 
-print "Loading Schema"
+print "Loading Schema\t\t"
 cd mysql-main
 mysql -u root -pRoboShop@1 <shipping.sql &>>$LOG
 STATUS $?
