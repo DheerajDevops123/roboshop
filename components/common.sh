@@ -88,7 +88,7 @@ JAVA() {
 }
 
 PYTHON() {
-   print "Install Python"
+   print "Install Python\t\t"
     yum install python36 gcc python3-devel -y &>>$LOG
     STATUS $?
     ADD_APP_USER
@@ -97,5 +97,10 @@ PYTHON() {
     print "Installing Dependencies"
     pip3 install -r requirements.txt &>>$LOG
     STATUS $?
+    USERID=${id -u roboshop}
+    GROUPID=${id -g roboshop}
     
+    print "Update Roboshop User"
+    sed -i -e "/uid/ c uid=$USERID " -e "/gid/ c gid=$GROUPID" /home/roboshop/payment/payment.ini &>>$LOG
+    STATUS $?
 }
