@@ -19,7 +19,7 @@ mv localhost.conf /etc/nginx/default.d/roboshop.conf
 STATUS $?
 
 print "Update Roboshop Config\t"
-sed -i -e '/catalogue/ s/localhost/catalogue.roboshop.internal/' -e '/user/ s/localhost/user.roboshop.internal/' /etc/nginx/default.d/roboshop.conf &>>$LOG
+sed -i -e '/catalogue/ s/localhost/catalogue.roboshop.internal/' -e '/user/ s/localhost/user.roboshop.internal/' -e '/cart/ s/localhost/cart.roboshop.internal/' /etc/nginx/default.d/roboshop.conf &>>$LOG
 STATUS $?
 
 print "Restart NGINX\t\t"
