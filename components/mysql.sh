@@ -10,7 +10,7 @@ enabled=1
 gpgcheck=0' > /etc/yum.repos.d/mysql.repo
 STATUS $?
 
-print "Install MySQL\t\t"
+print "Install MySQL\t"
 yum remove mariadb-libs -y &>>$LOG && yum install mysql-community-server -y &>>$LOG
 STATUS $?
 
@@ -36,12 +36,12 @@ if [ $? -eq 0 ]; then
     echo "uninstall plugin validate_password;" >/tmp/pass.sql
     mysql -u root -p"RoboShop@1" </tmp/pass.sql &>>$LOG
 else
-    echo "Validate Password Plugin is already uninstalled"
+    echo "Validate Password Plugin is already uninstalled" &>>$LOG
 fi
 STATUS $?
 
 
-print "Downloading Schema\t\t"
+print "Downloading Schema\t"
 curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>$LOG
 STATUS $?
 
