@@ -31,8 +31,8 @@ fi
 STATUS $?
 
 print "Uninstall Password validate plugin"
-echo 'show plugins;' | mysql -u root -p"RoboShop@1" | grep -i validate_password &>>$LOG
-if [ $? eq 0 ]; then
+echo 'show plugins;' | mysql -u root -p"RoboShop@1" 2>/dev/null | grep -i validate_password &>>$LOG
+if [ $? -eq 0 ]; then
     echo "uninstall plugin validate_password;" >/tmp/pass.sql
     mysql -u root -p"RoboShop@1" </tmp/pass.sql &>>$LOG
 else
