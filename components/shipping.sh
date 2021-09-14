@@ -2,5 +2,5 @@
 
 source components/common.sh
 
-COMPONENT=catalogue
+COMPONENT=shipping
 JAVA
