@@ -65,5 +65,22 @@ NODEJS() {
      cd /home/roboshop/$COMPONENT
     npm install --unsafe-perm &>>$LOG
     STATUS $?
+    chown roboshop:roboshop -R /home/roboshop
     SystemD_Setup
+}
+
+JAVA() {
+    print "Installing the Maven"
+    yum install maven -y &>>$LOG
+    STATUS $?
+    ADD_APP_USER
+    DOWNLOAD
+    cd /home/roboshop/shipping
+    print "Make Shipping Package\t"
+    mvn clean package &>>$LOG
+    STATUS $?
+    print "Set Up Shipping Package"
+    mv target/shipping-1.0.jar shipping.jar &>>$LOG
+    STATUS $?
+    chown roboshop:roboshop -R /home/roboshop
 }
