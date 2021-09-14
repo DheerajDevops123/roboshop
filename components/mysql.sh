@@ -10,11 +10,11 @@ enabled=1
 gpgcheck=0' > /etc/yum.repos.d/mysql.repo
 STATUS $?
 
-print "Install MySQL"
+print "Install MySQL\t"
 yum remove mariadb-libs -y &>>$LOG && yum install mysql-community-server -y &>>$LOG
 STATUS $?
 
-print "Start MySQL"
+print "Start MySQL\t"
 systemctl enable mysqld &>>$LOG && systemctl start mysqld &>>$LOG
 STATUS $?
 
