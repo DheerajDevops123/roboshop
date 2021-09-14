@@ -70,12 +70,12 @@ NODEJS() {
 }
 
 JAVA() {
-    print "Installing the Maven"
+    print "Installing the Maven\t"
     yum install maven -y &>>$LOG
     STATUS $?
     ADD_APP_USER
     DOWNLOAD
-    cd /home/roboshop/shipping/
+    cd /home/roboshop/shipping
     print "Make Shipping Package\t"
     mvn clean package &>>$LOG
     STATUS $?
@@ -83,4 +83,5 @@ JAVA() {
     mv target/shipping-1.0.jar shipping.jar &>>$LOG
     STATUS $?
     chown roboshop:roboshop -R /home/roboshop
+    SystemD_Setup
 }
