@@ -99,8 +99,8 @@ PYTHON() {
     STATUS $?
     USERID=$(id -u roboshop)
     GROUPID=$(id -g roboshop)
-    
-    print "Update Roboshop User"
+    print "Update Roboshop User\t"
     sed -i -e "/uid/ c uid=$USERID " -e "/gid/ c gid=$GROUPID" /home/roboshop/payment/payment.ini &>>$LOG
     STATUS $?
+   SystemD_Setup
 }
