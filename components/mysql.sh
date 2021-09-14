@@ -30,9 +30,6 @@ else
 fi
 STATUS $?
 
-
-exit
-
 print "Uninstall Password validate plugin"
 echo "uninstall plugin validate_password;" >/tmp/pass.sql
 mysql -u root -p"RoboShop@1" </tmp/pass.sql
