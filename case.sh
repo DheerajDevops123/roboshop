@@ -1,18 +1,18 @@
 #!/bin/bash
 
-# UNAME=$(uname)
+UNAME=$(uname)
 
-# case $UNAME in
-#     LINUX)
-#     echo "linux"
-#     ;;
-#   WINDOWS)
-#   echo "windows"
-#   ;;
-#   *)
-#   echo "none"
-#   ;;
-# esac
+case $UNAME in
+    LINUX)
+    echo "linux"
+    ;;
+  WINDOWS)
+  echo "windows"
+  ;;
+  *)
+  echo "none"
+  ;;
+esac
 
 
 # LOOPS 
