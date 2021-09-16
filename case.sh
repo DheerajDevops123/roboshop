@@ -1,14 +1,22 @@
 #!/bin/bash
 
-UNAME=$(UNAME)
+UNAME=$(uname)
 
 case $UNAME in
     LINUX)
     echo "linux"
-        ;;
-  WINDOWS)
-  echo "windows"
+    ;;
+   WINDOWS)
+   echo "windows"
+   ;;
+   *)
+   echo "none"
   ;;
-  *)
-  echo "none"
 esac
+
+
+# LOOPS 
+
+
+
+
